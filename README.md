@@ -1,2 +1,2 @@
 # Transparent-FCExp
-Generating Transparent Explanation for multi-hop Fact checking 
+Evaluating Transparency of Machine Generated Fact Checking Explanations
