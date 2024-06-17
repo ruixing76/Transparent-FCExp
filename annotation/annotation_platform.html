@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- CSS Part  -->
+    <style>
+        body {
+            background-color: whitesmoke;
+            width: 90%;
+            margin-right: 50px;
+            margin-left: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        /* make highlighted content standout */
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+            cursor: pointer;
+            /* Change cursor to pointer when highlighting */
+        }
+
+        .super_highlight {
+            background-color: lightgreen;
+            /* Change cursor to pointer when highlighting */
+        }
+
+        .exp_highlight {
+            background-color: aqua;
+            font-weight: bold;
+            cursor: pointer;
+            /* Change cursor to pointer when highlighting */
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+        }
+
+        .radio-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .horizontal_radio_button {
+            height: 100%;
+            width: 100%;
+            margin: 10%;
+        }
+
+        input[type="text"] {
+            /* align-self: center; */
+            text-align: center;
+            border: none;
+            font-size: 1.17em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            font-weight: bold;
+            /* margin-left: 0;
+            margin-right: 0; */
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        li {
+            line-height: 1.5;
+        }
+
+        #instructions_page {
+            text-align: center;
+            font-size: 16px;
+            /* margin-top: 1%; */
+            margin-right: 10%;
+            margin-left: 10%;
+        }
+
+        #instructionBody table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 95%;
+            border: 1px solid #ddd;
+        }
+
+        /* example task pane */
+        .example_task_pane {
+            border: groove 2px;
+            padding: 20px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            max-height: 20px;
+            transition: max-height 0.8s ease-in-out;
+        }
+
+        .example_task_pane.active-panel {
+            max-height: 9000px;
+        }
+
+        .example_task_pane_title {
+            font-weight: bold;
+        }
+
+        /* task caption: claim counter */
+        .task_caption {
+            border: groove 2px;
+            padding: 20px;
+            margin-bottom: 10px;
+            max-height: 100px;
+            text-align: center;
+        }
+
+        /* task pane */
+        .task_pane {
+            border: groove 2px;
+            padding: 20px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            max-height: 20px;
+            transition: max-height 1s ease-in-out;
+        }
+
+        .task_pane.active-panel {
+            max-height: 9000px;
+        }
+
+        .task_pane_title {
+            font-weight: bold;
+        }
+
+        /* full list of reason pane */
+        .example_reason_pane {
+            list-style-type: none;
+            padding-left: 20px;
+            overflow: hidden;
+            max-height: 0px;
+            transition: max-height 0.5s 0s ease-in-out;
+        }
+
+        .example_reason_pane.active-panel {
+            max-height: 9000px;
+        }
+
+        .reason_pane {
+            list-style-type: none;
+            padding-left: 20px;
+            overflow: hidden;
+            max-height: 0px;
+            transition: max-height 0.5s 0s ease-in-out;
+        }
+
+        .reason_pane.active-panel {
+            max-height: 9000px;
+        }
+
+        /* explanation sentence */
+        .clickable-sentence {
+            cursor: pointer;
+        }
+
+        .clickable-sentence:hover {
+            background-color: lightblue;
+            /* Set the hover background color */
+        }
+
+        .clickable-sentence.selected {
+            background-color: aqua;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 80%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* click button  */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2%;
+            text-align: right;
+            width: 100%;
+            margin-right: 5%;
+            margin-bottom: 2%;
+        }
+
+
+        /* slider */
+        .slider-container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .slider-label {
+            flex: 0.;
+        }
+
+        .caption-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .caption {
+            display: inline-block;
+            font-size: 12px;
+        }
+    </style>
+    <!-- You must include this JavaScript file -->
+    <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-database-compat.js"></script>
+</head>
+
+
+
+<body>
+    <div id="mturk_content">
+        <!-- Home page of the Task -->
+        <div id='home' style="display: block; margin-left: 0%; margin-right: 0%;">
+            <div id='instructions_page' style="text-align:left;">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body" id="instructionBody" style='display: block; '>
+                                <h1><strong>Determine the transparency and helpfulness of explanations for fact checking
+                                        claims</strong>
+                                </h1>
+                                <div id='background'>
+                                    <p>
+                                        A <strong>claim</strong> is a statement or assertion that declares something to
+                                        be true, and it
+                                        can be either truthful or bogus. In the fact-checking process, an
+                                        <strong>explanation</strong> is
+                                        essential. Your task is to assess whether a provided explanation is transparent
+                                        and helpful,
+                                        specifically in terms of <strong>appropriately citing relevant sources</strong>.
+                                    </p>
+
+                                    <p>
+                                        In this annotation, you will be presented <span id="claim_num"></span> claims.
+                                        For each claim, you'll be given a
+                                        list of supporting/debunking reasons and a succinct explanation that clarifies
+                                        the claim based on the listed reasons.
+                                    </p>
+
+                                    <p>
+                                        For each claim, you'll be asked to perform 2 tasks: (1) find missing citation
+                                        sentences
+                                        in the explanation; and (2) judge the helpfulness or utility of the explanation
+                                        in clarifying the claim.
+                                    </p>
+
+                                    <p>
+                                        In the upcoming section, we'll begin by providing two illustrative
+                                        <strong>examples</strong> of the
+                                        annotation task. This is intended to assist you in grasping the idea of the
+                                        task. <span class="highlight"> Please read the example carefully. </span>
+                                        Once you click "Proceed" at the bottom of the page, you will move on to
+                                        the primary annotation and encounter the first actual claim.
+                                    </p>
+
+                                    <p class="highlight">
+                                        Important information: Thank you so much for participating in the task. Please
+                                        kindly read the example carefully and complete the task. To ensure quality, we
+                                        will manually review your responses. 
+                                        Bonuses will be provided only for careful task completion.
+                                        Please feel free to reach out if you have any questions or suggestions. 
+                                        Each worker please kindly complete no more than 5 HITs in this round.
+                                    </p>
+
+                                </div>
+
+                                <div id='example_pane'>
+                                    <h2><strong>Annotation Example</strong></h2>
+
+                                    <div class="example_task_pane active-panel">
+                                        <div class="example_task_pane_title">
+                                            <h3><strong>Example Claim 1 (Task1)</strong></h3>
+                                        </div>
+                                        <div id='example_task1_instruction'>
+                                            <p><span style="text-decoration: underline">Please read the instructions
+                                                    carefully
+                                                    before proceeding.</span>
+                                            </p>
+                                            <h4>Instructions</h4>
+                                            <p>
+                                                In the first task, you'll be presented a claim,
+                                                core reasons, a conclusion about the truthfulness of the claim, and
+                                                a succinct explanation that cites these core reasons.
+                                                In the explanation, you'll see square brackets citations that
+                                                refer to core reasons (e.g. <em>highlighting the conversion of
+                                                    hundreds of
+                                                    individuals to Islam in the Philippines</em>[5]).
+                                                In this task, <span class="exp_highlight">one core reason is
+                                                    highlighted</span>, its corresponding citation
+                                                mark are <strong>missing</strong> in explanation sentences that cite
+                                                this reason.
+                                                Your task is to identify these sentences by clicking on them. Click on
+                                                it again will cancel selection.
+                                                Please note there might be <strong>zero, one or multiple</strong>
+                                                sentences that cite the
+                                                highlighted reason. If you cannot find any suitable sentence, please
+                                                click
+                                                the button that says "There isn't any sentence that can cite the
+                                                highlighted core reason".
+                                            </p>
+                                        </div>
+
+                                        <div id="example_task">
+                                            <div>
+                                                <h4>Claim</h4>
+                                                <p> It was stated on February 18, 2020 in a YouTube post: “20 million
+                                                    Chinese converted to Islam after it’s proven that the
+                                                    coronavirus doesn’t affect Muslims.”</p>
+                                            </div>
+                                            <div id="passage">
+                                                <h4>Full list of reasons</h4>
+                                                <p><em>If you are interested in the context of core reasons,
+                                                        we provide a full list of reasons where core reasons are
+                                                        extracted.
+                                                        You can view this list by clicking the "Expand" button.</em></p>
+                                                <ul id="eg_full_reasons" class="example_reason_pane">
+                                                    <li>1. Amid fears about
+                                                        the
+                                                        coronavirus disease, a YouTube video offers a novel way to
+                                                        inoculate
+                                                        yourself: convert to Islam.</li>
+                                                    <li>2. "20m Chinese gets
+                                                        converted to Islam after it is proven that corona virus did
+                                                        not
+                                                        affect the Muslims," reads the title of a video posted
+                                                        online
+                                                        Feb.
+                                                        18 .</li>
+                                                    <li>3. The footage shows
+                                                        a
+                                                        room full of men raising an index finger and reciting what
+                                                        sounds
+                                                        like the Shahadah, a statement of faith in Islam.</li>
+                                                    <li class="highlight">4. That’s because
+                                                        the
+                                                        footage is from at least as far back as May 26, 2019, when
+                                                        it
+                                                        was
+                                                        posted on Facebook with this caption: "Alhamdulillah welcome
+                                                        to
+                                                        our
+                                                        brothers in faith."</li>
+                                                    <li class="highlight">5. On Nov. 7, 2019,
+                                                        it
+                                                        was posted on YouTube with this title: "MashaaAllah hundreds
+                                                        converted to Islam in Philippines."</li>
+                                                    <li class="highlight">6. Both posts
+                                                        appeared
+                                                        online before the current outbreak of the new coronavirus,
+                                                        COVID-19,
+                                                        was first reported in Wuhan, China, on Dec. 31, 2019.</li>
+                                                    <li>7. But even if the
+                                                        footage followed the outbreak, Muslims are not immune to
+                                                        COVID-19,
+                                                        as the Facebook post claims.</li>
+                                                    <li>8. After China, Iran
+                                                        has
+                                                        emerged as the second focal point for the spread of
+                                                        COVID-19,
+                                                        the
+                                                        New York Times reported on Feb. 24 .</li>
+                                                    <li>9. "The Middle East
+                                                        is
+                                                        in many ways the perfect place to spawn a pandemic, experts
+                                                        say,
+                                                        with the constant circulation of both Muslim pilgrims and
+                                                        itinerant
+                                                        workers who might carry the virus."</li>
+                                                    <li>10. On Feb. 18,
+                                                        Newsweek
+                                                        reported that coronavirus "poses a serious risk to millions
+                                                        of
+                                                        inmates in China’s Muslim prison camps."</li>
+                                                </ul>
+                                                <crowd-button id="eg_psg_show_btn"
+                                                    onclick="displayReason('eg_full_reasons','eg_psg_show_btn')">Expand</crowd-button>
+                                            </div>
+                                            <div id="reason">
+                                                <h4>Core reasons</h4>
+                                                <ul id="eg_core_reasons">
+                                                    <li>4. That’s because the footage is from at least as far back
+                                                        as
+                                                        May
+                                                        26, 2019, when it was posted on Facebook with this caption:
+                                                        "Alhamdulillah welcome to our brothers in faith."</li>
+                                                    <li>5. On Nov. 7, 2019, it was posted on YouTube with this
+                                                        title:
+                                                        "MashaaAllah hundreds converted to Islam in Philippines."
+                                                    </li>
+                                                    <li class="exp_highlight">6. Both posts appeared online before
+                                                        the
+                                                        current
+                                                        outbreak of the
+                                                        new coronavirus, COVID-19, was first reported in Wuhan,
+                                                        China,
+                                                        on Dec. 31, 2019.</li>
+                                                </ul>
+                                            </div>
+                                            <div id="veracity">
+                                                <h4>Conclusion</h4>
+                                                <p class="veracity_txt">FALSE</p>
+                                            </div>
+                                            <div id="explanation">
+                                                <h4>Explanation</h4>
+                                                <!-- ${explanation} -->
+                                                <p><span name="example_explanation" class="clickable-sentence"
+                                                        data-value="0">The
+                                                        claim
+                                                        that 20 million Chinese
+                                                        converted to Islam after the
+                                                        coronavirus was proven to not affect Muslims is
+                                                        false.</span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="1">The
+                                                        viral
+                                                        footage that is being used as evidence is actually older
+                                                        than
+                                                        the
+                                                        current pandemic.</span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="2">
+                                                        The
+                                                        same video was published on
+                                                        Facebook on May
+                                                        26, 2019, with a caption that welcomed new brothers in faith
+                                                        [4].</span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="3">Moreover,
+                                                        the video made its way to
+                                                        YouTube on November 7, 2019,
+                                                        highlighting the conversion of hundreds of individuals to
+                                                        Islam
+                                                        in
+                                                        the Philippines [5]. </span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="4">These
+                                                        dates clearly predate the
+                                                        first reporting
+                                                        of the new coronavirus (COVID-19) outbreak in Wuhan, China,
+                                                        on
+                                                        December 31, 2019. </span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="5">
+                                                        Subsequently, the claim's timeline is inconsistent with the
+                                                        established chronology of these two events in Nov and Dec [5].
+                                                    </span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="6">Therefore,
+                                                        the assertion in the
+                                                        claim regarding
+                                                        mass conversions due to the coronavirus is not corroborated
+                                                        by
+                                                        the
+                                                        timeline of events revealed in the sources of the
+                                                        video.</span>
+
+                                                </p>
+                                                <input type="hidden" id="example_selected_exp"
+                                                    name="example_selected_exp">
+                                                <input type="radio" id="eg_no_ans_btn"> <label>
+                                                    There isn't any sentence that can correctly cite the highlighted
+                                                    core reason.</label>
+                                            </div>
+                                            <div>
+                                                <h4>Example Answer (Click to see how to annotate)</h4>
+                                                <crowd-button id="c1t1_example_answer_btn" class="btn"
+                                                    onclick="clickToReveal('c1t1_example_answer_btn','c1t1_example_answer')">Click
+                                                    to reveal the example answer</crowd-button>
+
+                                                <ul id="c1t1_example_answer" style="display: none;">
+                                                    <li> These dates clearly predate the first reporting of the new
+                                                        coronavirus (COVID-19) outbreak in Wuhan, China, on December
+                                                        31, 2019 [6]. </li>
+                                                    <li>Subsequently, the claim's timeline is inconsistent with the
+                                                        established chronology of these two events in Nov and Dec
+                                                        [5][6]. </li>
+                                                    <p> These two sentences accurately represent the information
+                                                        presented in the cited sentence. It maintains faithfulness to
+                                                        the original statement by conveying the same information about
+                                                        the timing of the posts and the location of COVID-19 outbreak
+                                                        (Wuhan). It helps the reader easily trace the source of
+                                                        information back to
+                                                        its origin, promoting transparency and credibility in the text.
+                                                    </p>
+                                                </ul>
+                                            </div>
+
+                                            <div class="button-container">
+                                                <crowd-button class='example_continue_button'>
+                                                    Continue
+                                                </crowd-button>
+                                                <label>(once clicked you will move to the next task and can't
+                                                    return)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="example_task_pane">
+                                        <div class="example_task_pane_title">
+                                            <h3><strong>Example Claim 1 (Task2)</strong></h3>
+                                        </div>
+                                        <div id='instruction'>
+                                            <p><span style="text-decoration: underline">Please read the instructions
+                                                    carefully
+                                                    before proceeding.</span>
+                                            </p>
+                                            <h4>Instructions</h4>
+                                            <p>
+                                                In the second task, you'll be presented the same claim,
+                                                explanation and conclusion as before, and your job is to rate how
+                                                helpful is the explanation in clarifying the truthfulness of the
+                                                claim.
+                                            </p>
+                                        </div>
+
+                                        <div id="example_task">
+                                            <div>
+                                                <h4>Claim</h4>
+                                                <p> It was stated on February 18, 2020 in a YouTube post: “Says 20
+                                                    million
+                                                    Chinese converted to Islam after it’s proven that the
+                                                    coronavirus
+                                                    doesn’t affect Muslims.”</p>
+                                            </div>
+                                            <div id="explanation">
+                                                <h4>Explanation</h4>
+                                                <p>The claim that 20 million Chinese converted to Islam after the
+                                                    coronavirus was proven to not affect Muslims is false. The viral
+                                                    footage that is being used as evidence is actually older than
+                                                    the
+                                                    current pandemic. The same video was published on Facebook on
+                                                    May
+                                                    26, 2019, with a caption that welcomed new brothers in faith
+                                                    [4].
+                                                    Moreover, the video made its way to YouTube on November 7, 2019,
+                                                    highlighting the conversion of hundreds of individuals to Islam
+                                                    in
+                                                    the Philippines [5]. These dates clearly predate the first
+                                                    reporting
+                                                    of the new coronavirus (COVID-19) outbreak in Wuhan, China, on
+                                                    December 31, 2019 [6]. Therefore, the assertion in the claim
+                                                    regarding
+                                                    mass conversions due to the coronavirus is not corroborated by
+                                                    the
+                                                    timeline of events revealed in the sources of the video.</p>
+                                            </div>
+                                            <div id="veracity">
+                                                <h4>Conclusion</h4>
+                                                <p class="veracity_txt"></p>
+                                            </div>
+                                            <div id="example_utility_rate">
+                                                <h4>Rating</h4>
+                                                <p>How helpful is the explanation in clarifying the truthfulness of
+                                                    the claim?</p>
+                                                <br><br>
+                                                <div class="slider-container">
+                                                    <div class="slider-labels">
+                                                        <div class="slider-label">Less helpful</div>
+                                                        <div class="slider-label">More helpful</div>
+                                                    </div>
+
+                                                    <input type="range" id="example_rating_slider" class="slider"
+                                                        min="0" max="100" value="50">
+
+                                                    <div class="caption-container">
+                                                        <div class="caption" style="left: 0%">0%</div>
+                                                        <div class="caption" style="left: 25%">25%</div>
+                                                        <div class="caption" style="left: 50%">50%</div>
+                                                        <div class="caption" style="left: 75%">75%</div>
+                                                        <div class="caption" style="left: 100%">100%</div>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                                <div id="example_selected_rating" style="display: none;">[Please
+                                                    select the value using the
+                                                    sliding bar.]</div>
+                                                <div>
+                                                    <h4>Example Answer</h4>
+                                                    <crowd-button id="c1t2_example_answer_btn" class="btn"
+                                                        onclick="clickToReveal('c1t2_example_answer_btn','c1t2_example_answer')">Click
+                                                        to reveal the example answer</crowd-button>
+
+                                                    <ul id="c1t2_example_answer" style="display: none;">
+                                                        <li> Example rating: 98% </li>
+                                                        <p> The explanation is very helpful in clarifying the
+                                                            truthfulness
+                                                            of the claim. It provides a clear timeline of events that
+                                                            shows the claim is false. The generated explanation are
+                                                            coherent, fluent and the citation is faithful.
+                                                        </p>
+                                                        </p>
+                                                    </ul>
+                                                </div>
+                                                <div class="button-container">
+                                                    <crowd-button class='example_continue_button'>
+                                                        Continue
+                                                    </crowd-button>
+                                                    <label>(once clicked you will move to the next task and can't
+                                                        return)</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="example_task_pane">
+                                        <div class="example_task_pane_title">
+                                            <h3><strong>Example Claim 2 (Task1)</strong></h3>
+                                        </div>
+
+                                        <div id="example_task">
+                                            <div>
+                                                <h4>Claim</h4>
+                                                <p> The typical anglerfish is seven feet long.</p>
+                                            </div>
+                                            <div id="passage">
+                                                <h4>Full list of reasons</h4>
+                                                <p><em>If you are interested in the context of core reasons,
+                                                        we provide a full list of reasons where core reasons are
+                                                        extracted.
+                                                        You can view this list by clicking the "Expand" button.</em></p>
+                                                <ul id="eg_full_reasons" class="example_reason_pane">
+                                                    <li>1. Anglerfish may have a reputation for being among the
+                                                        creepier-looking ocean-dwellers, but it’s not because they grow
+                                                        to be seven feet long, as a viral image on Facebook claims.</li>
+                                                    <li>2. The Jan. 12 post shows a young girl reaching toward what
+                                                        appears to be a very large anglerfish mounted on display at a
+                                                        museum.</li>
+                                                    <li>3. The text above the image reads, "So,... I’ve spent my entire
+                                                        life thinking the Deep Sea Angler Fish was about the size of a
+                                                        Nerf football.</li>
+                                                    <li>4. How horrifying is it that a typical
+                                                        specimen is SEVEN FEET LONG?"</li>
+                                                    <li>5. This post, which had been shared more than
+                                                        13,000 times as of Jan. 24, was flagged by Facebook as part of
+                                                        efforts to combat false news and information on its News Feed.
+                                                    </li>
+                                                    <li>6. No, anglerfish, known for the fishing
+                                                        pole-like protrusion that dangles over the females’ heads, do
+                                                        not grow to be seven feet long.</li>
+                                                    <li>7. According to the National Oceanic and Atmospheric
+                                                        Administration, anglerfish can’t grow any longer than 3.3 feet,
+                                                        but a typical anglerfish is even smaller -- less than a foot.
+                                                    </li>
+                                                    <li class="highlight">8. What’s more, the picture referenced in the
+                                                        Facebook post
+                                                        alleging that anglerfish are typically 7 feet is taken from the
+                                                        Australian Museum’s 2012 exhibit titled "Deep Oceans."</li>
+                                                    <li>9. The anglerfish in the photo is actually a large-scale
+                                                        sculpture model of the fish made of plaster.</li>
+                                                    <li class="highlight">10. When the exhibit opened in June 2012, The
+                                                        Sydney Morning
+                                                        Herald reported on how the exhibit’s team had created an
+                                                        "oversized anglerfish" and listed the many steps in making it:
+                                                        "Pieces such as the oversized anglerfish, with huge fangs and
+                                                        antenna-like flashing rod to attract prey, begin with cutting
+                                                        and welding a metal frame, then sculpting material over it and,
+                                                        finally, hand painting it," the story says.</li>
+                                                </ul>
+                                                <crowd-button id="eg_psg_show_btn"
+                                                    onclick="displayReason('eg_full_reasons','eg_psg_show_btn')">Expand</crowd-button>
+                                            </div>
+                                            <div id="reason">
+                                                <h4>Core reasons</h4>
+                                                <ul id="eg_core_reasons">
+                                                    <li class="exp_highlight">8. What’s more, the picture referenced in
+                                                        the Facebook post
+                                                        alleging that anglerfish are typically 7 feet is taken from the
+                                                        Australian Museum’s 2012 exhibit titled "Deep Oceans."</li>
+                                                    <li>10. When the exhibit opened in June 2012, The Sydney Morning
+                                                        Herald reported on how the exhibit’s team had created an
+                                                        "oversized anglerfish" and listed the many steps in making it:
+                                                        "Pieces such as the oversized anglerfish, with huge fangs and
+                                                        antenna-like flashing rod to attract prey, begin with cutting
+                                                        and welding a metal frame, then sculpting material over it and,
+                                                        finally, hand painting it," the story says.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="veracity">
+                                                <h4>Conclusion</h4>
+                                                <p class="veracity_txt">FALSE</p>
+                                            </div>
+                                            <div id="explanation">
+                                                <h4>Explanation</h4>
+                                                <!-- ${explanation} -->
+                                                <p><span name="example_explanation" class="clickable-sentence"
+                                                        data-value="0">The claim
+                                                        that the typical anglerfish is seven feet long is false.</span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="1">Information sourced from a 2021
+                                                        article on marine life reveals that an image featured in a
+                                                        Facebook post, purporting to depict an accurate representation
+                                                        of a common anglerfish, is accurately presented as an authentic
+                                                        specimen.</span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="2"> At the time of the exhibit's
+                                                        opening, The Sydney Morning Herald noted that the display
+                                                        contained an "oversized anglerfish," which was fabricated using
+                                                        sculpting materials and a metal frame [10].</span>
+                                                    <span name="example_explanation" class="clickable-sentence"
+                                                        data-value="3">Thus, it's clear that the claim
+                                                        is based on an artificial construct not representing a typical
+                                                        anglerfish's size. </span>
+                                                </p>
+                                                <input type="hidden" id="example_selected_exp"
+                                                    name="example_selected_exp">
+                                                <input type="radio" id="eg_no_ans_btn"> <label>
+                                                    There isn't any sentence that can cite the highlighted
+                                                    core reason.</label>
+                                            </div>
+                                            <div>
+                                                <h4>Example Answer</h4>
+                                                <crowd-button id="c2t1_example_answer_btn" class="btn"
+                                                    onclick="clickToReveal('c2t1_example_answer_btn','c2t1_example_answer')">Click
+                                                    to reveal the example answer</crowd-button>
+
+                                                <ul id="c2t1_example_answer" style="display: none;">
+                                                    <li> There isn't any sentence that can correctly cite the
+                                                        highlighted core reason. </li>
+                                                    <p> Though the second sentence seems plausible and relevant to the
+                                                        highlighted core reason, it is not a suitable citation.
+                                                        It misrepresents the information and inaccurately claims that
+                                                        the Facebook post's image is accurately
+                                                        presented as an authentic specimen, while the highlighted core
+                                                        reason
+                                                        clearly states that the image is sourced from an exhibit,
+                                                        suggesting it's not authentic. Incorrect year 2021 in the
+                                                        explanation, it should be 2012. This
+                                                        misrepresentation
+                                                        in this generated explanation compromises faithfulness,
+                                                        factuality.</p>
+                                                </ul>
+                                            </div>
+
+                                            <div class="button-container">
+                                                <crowd-button class='example_continue_button'>
+                                                    Continue
+                                                </crowd-button>
+                                                <label>(once clicked you will move to the next task and can't
+                                                    return)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="example_task_pane">
+                                        <div class="example_task_pane_title">
+                                            <h3><strong>Example Claim 2 (Task2)</strong></h3>
+                                        </div>
+                                        <div id='instruction'>
+                                            <p><span style="text-decoration: underline">Please read the instructions
+                                                    carefully
+                                                    before proceeding.</span>
+                                            </p>
+                                            <h4>Instructions</h4>
+                                            <p>
+                                                In the second task, you'll be presented the same claim,
+                                                explanation and conclusion as before, and your job is to rate how
+                                                helpful is the explanation in clarifying the truthfulness of the
+                                                claim.
+                                            </p>
+                                        </div>
+
+                                        <div id="example_task">
+                                            <div>
+                                                <h4>Claim</h4>
+                                                <p> The typical anglerfish is seven feet long.</p>
+                                            </div>
+                                            <div id="explanation">
+                                                <h4>Explanation</h4>
+                                                <p>The claim that the typical anglerfish is seven feet long is false.
+                                                    Information sourced from a 2021 article on marine life reveals that
+                                                    an image featured in a
+                                                    Facebook post, purporting to depict an accurate representation
+                                                    of a common anglerfish, is accurately presented as an authentic
+                                                    specimen [8].
+                                                    At the time of the exhibit's opening, The Sydney Morning Herald
+                                                    noted that the display contained an "oversized anglerfish," which
+                                                    was fabricated using sculpting materials and a metal frame [10].
+                                                    Thus, it's clear that the claim is based on an artificial construct
+                                                    not representing a typical anglerfish's size.</p>
+                                            </div>
+                                            <div id="veracity">
+                                                <h4>Conclusion</h4>
+                                                <p class="veracity_txt"></p>
+                                            </div>
+                                            <div id="example_utility_rate">
+                                                <h4>Rating</h4>
+                                                <p>How helpful is the explanation in clarifying the truthfulness of
+                                                    the claim?</p>
+                                                <br><br>
+                                                <div class="slider-container">
+                                                    <div class="slider-labels">
+                                                        <div class="slider-label">Less helpful</div>
+                                                        <div class="slider-label">More helpful</div>
+                                                    </div>
+
+                                                    <input type="range" id="example_rating_slider" class="slider"
+                                                        min="0" max="100" value="50">
+
+                                                    <div class="caption-container">
+                                                        <div class="caption" style="left: 0%">0%</div>
+                                                        <div class="caption" style="left: 25%">25%</div>
+                                                        <div class="caption" style="left: 50%">50%</div>
+                                                        <div class="caption" style="left: 75%">75%</div>
+                                                        <div class="caption" style="left: 100%">100%</div>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                                <div id="example_selected_rating" style="display: none;">[Please
+                                                    select the value using the
+                                                    sliding bar.]</div>
+                                                <div>
+                                                    <h4>Example Answer</h4>
+                                                    <crowd-button id="c2t2_example_answer_btn" class="btn"
+                                                        onclick="clickToReveal('c2t2_example_answer_btn','c2t2_example_answer')">Click
+                                                        to reveal the example answer</crowd-button>
+
+                                                    <ul id="c2t2_example_answer" style="display: none;">
+                                                        <li> Example rating: 10% </li>
+                                                        <p> While the generated explanation is fluent, it is not helpful
+                                                            in clarifying the truthfulness of the claim. The citation is
+                                                            not suitable. It misrepresents important
+                                                            information in the core reasons and caused confusion.
+                                                        </p>
+                                                        </p>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="highlight">Tips:
+                                        <ul class="highlight">
+                                            <li>Usually if a sentence correctly mentioned facts in the highlighted core
+                                                reason, it should be selected as a citation sentence.</li>
+                                            <li>If a sentence wrongly mentioned facts in the highlighted core reason, it
+                                                should not be selected.</li>
+                                        </ul>
+                                        </p>
+                                    </div>
+
+                                    <br><br>
+                                    <crowd-checkbox id='agreement_check' style="margin-top: 10pt;">
+                                        I have read the <a
+                                            href="https://docs.google.com/document/d/1OVkuJeOIcTjv14zn-ervX7WvR0MFCvOQaQ-bSZ9kOLQ/edit?usp=sharing"
+                                            target="_blank">Plain Language Statement</a> and
+                                        <a href="https://docs.google.com/document/d/1d6dJKAdWzvMM6HbrKUX9-t1wEs--f4cTT3Ci4rimXJw/edit?usp=sharing"
+                                            target="_blank">Consent Form</a>
+                                        and agree to work on the task.
+                                    </crowd-checkbox>
+                                    <br>
+                                    <div class="container"
+                                        style="margin-top: 2%; text-align: right; width:100%;margin-right: 5%; margin-bottom: 10%;">
+                                        <crowd-button class='btn' style='margin-left: 10pt;'
+                                            onclick="proceedToMainTask('agreement_check','instructions_page', 'main_task')">
+                                            Proceed
+                                        </crowd-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="main_task" style="width: 80%; margin-right: 10%; margin-left: 10%; display: none;">
+            <div id="task_caption" class="task_caption">
+                <h2 id="task_caption_txt"><strong>Claim ? out of ?</strong></h2>
+            </div>
+
+            <!-- Task 1  -->
+            <div id='task1_pane' class="task_pane">
+                <div class="task_pane_title">
+                    <h3><strong>Task 1</strong></h3>
+                </div>
+                <div id='task1_instruction'>
+                    <p><span style="text-decoration: underline">Please read the instructions
+                            carefully before proceeding.</span>
+                    </p>
+                    <h4>Instructions</h4>
+                    <p>
+                        In the first task, you'll be presented a claim,
+                        core reasons, a conclusion about the truthfulness of the claim, and
+                        a succinct explanation that cites these core reasons.
+                        In the explanation, you'll see some citations in square brackets that
+                        refers to the core reasons (e.g. <em>highlighting the conversion of
+                            hundreds of
+                            individuals to Islam in the Philippines</em>[5]).
+                        In this task, <span class="exp_highlight">one core reason is
+                            highlighted</span>, its corresponding citation
+                        mark are <strong>missing</strong> in all explanation sentences that cite
+                        this reason.
+                        Your task is to identify these sentences by clicking on them. Click on
+                        it again will cancel selection.
+                        Please note there might be <strong>zero, one or multiple</strong>
+                        sentences that cite the
+                        highlighted reason. If you cannot find any suitable sentence, please
+                        click
+                        the button that says "There isn't any sentence that can cite the
+                        highlighted core reason".
+                    </p>
+                </div>
+
+                <div>
+                    <div id="claim">
+                        <h4>Claim</h4>
+                        <p class="claim_txt"></p>
+                    </div>
+                    <div id="passage">
+                        <h4>Full list of reasons</h4>
+                        <p><em>If you are interested in the context of core reasons,
+                                we provide a full list of reasons where core reasons are extracted.
+                                You can view this list by clicking the "Expand" button.</em></p>
+                        <ul id="plain_passage" class="reason_pane">
+                        </ul>
+                        <crowd-button id="psg_show_btn"
+                            onclick="displayReason('plain_passage','psg_show_btn')">Expand</crowd-button>
+                    </div>
+                    <div id="reason">
+                        <h4>Core reasons</h4>
+                        <ul id="plain_reason">
+
+                        </ul>
+                    </div>
+                    <div id="veracity">
+                        <h4>Conclusion</h4>
+                        <p class="veracity_txt"></p>
+                    </div>
+                    <div id="explanation">
+                        <h4>Explanation</h4>
+                        <p id="selectable_explanation">
+                        </p>
+                        <input type="radio" id="no_ans_btn">
+                        <label>
+                            There isn't any sentence that can correctly cite the highlighted
+                            core reason.</label>
+                    </div>
+                    <div class="button-container">
+                        <crowd-button class='continue_button'>
+                            Continue
+                        </crowd-button>
+                        <label>(once clicked you will move to the next task and can't return)</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Task 2  -->
+            <div id='task2_pane' class='task_pane'>
+                <div class="task_pane_title">
+                    <h3><strong>Task 2</strong></h3>
+                </div>
+                <div id='instruction'>
+                    <p><span style="text-decoration: underline">Please read the instructions
+                            carefully
+                            before proceeding.</span>
+                    </p>
+                    <h4>Instructions</h4>
+                    <p>
+                        In the second task, you'll be presented the same claim,
+                        explanation and conclusion as before, and your job is to rate how
+                        helpful is the explanation in clarifying the truthfulness of the
+                        claim.
+                    </p>
+                </div>
+
+                <div>
+                    <div id="claim">
+                        <h4>Claim</h4>
+                        <p class="claim_txt"></p>
+                    </div>
+                    <div id="explanation">
+                        <h4>Explanation</h4>
+                        <p id="plain_explanation"></p>
+                    </div>
+                    <div id="veracity">
+                        <h4>Conclusion</h4>
+                        <p class="veracity_txt"></p>
+                    </div>
+                    <div id="utility_rate">
+                        <h4>Rating</h4>
+                        <p>How helpful is the explanation in clarifying the truthfulness of the claim?</p>
+                        <br><br>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <div class="slider-label">Less helpful</div>
+                                <div class="slider-label">More helpful</div>
+                            </div>
+                            <input type="range" id="rating_slider" class="slider" min="0" max="100" value="50">
+                            <div class="caption-container">
+                                <div class="caption" style="left: 0%">0%</div>
+                                <div class="caption" style="left: 25%">25%</div>
+                                <div class="caption" style="left: 50%">50%</div>
+                                <div class="caption" style="left: 75%">75%</div>
+                                <div class="caption" style="left: 100%">100%</div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div id="selected_rating" style="display: none;">[Please select the value using the
+                            sliding bar.]</div>
+                    </div>
+                    <div class="button-container">
+                        <crowd-button class='continue_button'>
+                            Continue
+                        </crowd-button>
+                        <label>(once clicked you will move to the next task and can't return)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finish task -->
+            <div id="finish_pane" class="task_pane">
+                <div class="task_pane_title">
+                    <h3><strong>Finishing Task</strong></h3>
+                </div>
+                <div id="next_instance_container" class="container"
+                    style="display: block; margin-top: 2%; text-align: center; width:100%;margin-right: 5%; margin-bottom: 10%;">
+                    <p> Your answer has been recorded. Please click to continue!</p>
+                    <crowd-button id='next_claim' variant="primary" style='margin-top: 20px;'
+                        onclick="recordAndProceed()"> Proceed to next claim
+                    </crowd-button>
+                </div>
+                <!-- appear when finishing the last -->
+                <crowd-form id="submit_container" class="container"
+                    style="display: none; margin-top: 2%; text-align: center; width:100%;margin-right: 5%; margin-bottom: 10%;"
+                    onSubmit="return submitData()">
+                    <p> Thank you for your effort! Please click the button to submit. If you have any suggestions or
+                        questions about this task, please don't hesitate to contact us through
+                        Mturk. We would greatly appreciate and reward your long-term support!</p>
+                    <input name="answer" type="hidden" id="data_to_submit" value="none">
+                    <crowd-button id='submit' form-action="submit" variant="primary" style='margin-top: 20px;'>
+                        Submit
+                    </crowd-button>
+                </crowd-form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    // PolitiHop_data storage
+    var batch_data = {{ batch_data | tojson | safe }};
+    const model_name = "gpt4"
+    const no_task1_ans = '-2'
+    const no_task2_ans = '-1'
+
+    answer_to_submit = []; // full answer to submit
+    answer_per_claim = {
+        "selected_explanations": [],
+        "rating": no_task2_ans
+    }
+
+    function initAnswer() {
+        answer_per_claim = {
+            "selected_explanations": [],
+            "rating": no_task2_ans
+        }
+    }
+</script>
+
+<script>
+    /*********** functions executed when loading ************/
+    const batch_keys = Object.keys(batch_data);
+    const num_task_to_do = batch_keys.length;
+    cur_task = 0;
+    cur_task_hash = null;
+    const claim_num_element = document.getElementById("claim_num");
+    claim_num_element.textContent = num_task_to_do;
+
+    // add example task logic
+    addCollapseListener(".example_task_pane", ".example_continue_button");
+    addNoAnsListener("example_explanation", "eg_no_ans_btn", 6);
+    selectExpAndDisplay("example_explanation", "example_selected_exp", "eg_no_ans_btn", 6);
+    ratingDisplay("example_rating_slider", "example_selected_rating");
+
+    // add initial task logic
+    useDataToRender(cur_task, num_task_to_do);
+    addCollapseListener(".task_pane", ".continue_button");
+    addTaskLogic();
+
+
+    /*********** functions for page render ************/
+    function useDataToRender(cur_task, num_task_to_do) {
+        /***
+         * render PolitiHop_data for one claim
+         * clear pervious PolitiHop_data before load new PolitiHop_data
+         */
+        cur_task_key = batch_keys[cur_task];
+        data = batch_data[cur_task_key];
+        cur_task_hash = cur_task_key;
+
+        article_id = data['article_id'];
+        claim = data["claim"];
+        veracity = data["label"].toUpperCase();
+
+        passage_list = data["passage"].split('\n');
+        chain = data["chain"][1];
+
+        masked_explanation = data["masked_explanation"][model_name];
+        explanation = data["explanation"][model_name];
+
+        masked_id = data["masked_cit"][model_name];
+
+        const claim_elements = document.querySelectorAll('.claim_txt');
+        const veracity_elements = document.querySelectorAll('.veracity_txt');
+
+        const plain_passage_element = document.getElementById("plain_passage");
+        const plain_reason_element = document.getElementById("plain_reason");   // we use plain to distinguish from selectable, which was used in deprecated version
+        const selectable_explanation_element = document.getElementById("selectable_explanation");
+        const plain_explanation_element = document.getElementById("plain_explanation");
+
+        const utility_slider_element = document.getElementById("rating_slider");
+        const task_caption_element = document.getElementById("task_caption_txt");
+        const no_ans_btn = document.getElementById("no_ans_btn");
+        const psg_show_btn = document.getElementById("psg_show_btn");
+
+        // clear no_ans_btn_checked
+        no_ans_btn.checked = false;
+
+        // reset psg_show_btn text
+        psg_show_btn.textContent = "Expand"
+
+        // set task caption
+        task_caption_element.textContent = "Claim " + (cur_task + 1) + " out of " + num_task_to_do;
+
+        // clear data displayed on previous page
+        claim_elements.innerHTML = "";
+        veracity_elements.innerHTML = "";
+        selectable_explanation_element.innerHTML = "";
+        plain_passage_element.innerHTML = "";
+        plain_passage_element.classList.remove('active-panel');
+        plain_reason_element.innerHTML = "";
+        plain_explanation_element.innerHTML = "";
+        utility_slider_element.value = 50;  //reset utility_slider value tp 50
+
+        // Loop through the elements and set their content
+        claim_elements.forEach(function (element) {
+            element.textContent = claim;
+        });
+        veracity_elements.forEach(function (element) {
+            element.textContent = veracity;
+        });
+
+        // render the plain passage
+        for (let i = 0; i < passage_list.length; i++) {
+            var li_element = document.createElement('li');
+            if (chain.includes(i)) li_element.classList.add('highlight');
+            li_element.textContent = passage_list[i];
+            plain_passage_element.appendChild(li_element);
+        }
+
+        // render the plain reason in task1, highlight the sentence that has the masked id
+        for (let i = 0; i < chain.length; i++) {
+            var li_element = document.createElement('li');
+            if (chain[i] == masked_id) li_element.classList.add('exp_highlight');
+            li_element.textContent = passage_list[chain[i]];
+            plain_reason_element.appendChild(li_element);
+        }
+
+
+        // render the selectable explanation
+        for (let i = 0; i < masked_explanation.length; i++) {
+            var span_element = document.createElement('span');
+
+            span_element.setAttribute('name', 'explanation');
+            span_element.setAttribute('data-value', i);
+            span_element.classList.add('clickable-sentence');
+            span_element.textContent = masked_explanation[i];
+            selectable_explanation_element.appendChild(span_element);
+        }
+
+        // render the plain explanation
+        plain_explanation_element.textContent = explanation;
+
+        // decide whether to show the next claim pane or submit pane
+        if (cur_task + 1 == num_task_to_do) {
+            flip_display("next_instance_container");
+            flip_display("submit_container");
+        }
+    }
+
+    function addTaskLogic() {
+        // add task logic
+        // addCollapseListener(".task_pane", ".continue_button");
+        addNoAnsListener("explanation", "no_ans_btn", masked_id);
+        selectExpAndDisplay("explanation", "selected_exp", "no_ans_btn", masked_id);
+        ratingDisplay("rating_slider", "selected_rating");
+    }
+
+
+    /*********** functions for task logic ************/
+    function ratingDisplay(slider_name, rating_display_name) {
+        /***
+         * display rating value
+         ***/
+        const ratingSlider = document.getElementById(slider_name);
+        const selectedRating = document.getElementById(rating_display_name);
+        ratingSlider.addEventListener("input", function () {
+            rating_value = this.value;
+            answer_per_claim["rating"] = rating_value;
+            // const ratingArray = ["None", "not useful at all", "not useful", "neutral", "useful", "very useful"]
+            selectedRating.textContent = 'Selected rating score:' + rating_value;
+        });
+    }
+
+    function createUl(content_dict, reasons_to_highlight, container) {
+        /**
+         * sort the content_dict and reorder and display them in container
+         * 
+         */
+        const ul_element = document.createElement("ul");
+        // const sortedKeys = Object.keys(content_dict).sort();  // sort the reasons according to their order in the passage
+        Object.keys(content_dict).forEach(key => {
+            const li_element = document.createElement("li");
+            if (reasons_to_highlight.includes(key)) {
+                li_element.classList.add('highlight');
+            }
+            li_element.textContent = content_dict[key];
+            ul_element.appendChild(li_element);
+        });
+        const ul_container = document.getElementById(container);
+        ul_container.innerHTML = ""; // Clear the container first
+        ul_container.appendChild(ul_element);
+    }
+
+
+    function selectExpAndDisplay(clickable_sentence_name, selected_exp_name, no_ans_btn_name, citation_marker_num) {
+        /**
+         * select sentence in the explanation and highlight them, record sentence number
+         */
+        // Get all the <span> elements containing sentences
+        const sentences = document.getElementsByName(clickable_sentence_name);
+        const no_ans_button = document.getElementById(no_ans_btn_name);
+        const citation_marker = '[' + citation_marker_num + ']';
+
+        sentences.forEach(sentence => {
+            sentence.addEventListener("click", () => {
+                // Toggle the selection state of the clicked sentence
+                sentence.classList.toggle("selected");
+
+                // Update the text content to show the citation marker for selected sentences
+                if (sentence.classList.contains("selected")) {
+                    // add selected sentence id and remove no ans id
+                    answer_per_claim["selected_explanations"] = answer_per_claim["selected_explanations"].filter(s => s !== no_task1_ans);
+                    if (!answer_per_claim["selected_explanations"].includes(sentence.getAttribute("data-value"))) {
+                        answer_per_claim["selected_explanations"].push(sentence.getAttribute("data-value"));
+                    }
+                    sentence.textContent = sentence.textContent + citation_marker;
+                } else {
+                    // remove selected sentence id
+                    answer_per_claim["selected_explanations"] = answer_per_claim["selected_explanations"].filter(s => s !== sentence.getAttribute("data-value"));
+                    sentence.textContent = sentence.textContent.replace(citation_marker, "");
+                }
+
+                // Update the state of the no_ans_button based on whether any sentence is selected
+                const selectedSentences = Array.from(document.querySelectorAll('.selected'))
+                    .map(selectedSentence => selectedSentence.getAttribute("data-value"));
+                no_ans_button.checked = selectedSentences.length === 0;
+
+                // console.log(answer_per_claim["selected_explanations"]);
+            });
+        });
+    }
+
+    /***********functions for page change logic************/
+
+    function addCollapseListener(panel_name, continue_btn_name) {
+        /***
+         * add listener to continue button in each task
+         * click the button to collapse current task and expand next task
+         * alert window if no answer is put in current task
+         */
+        const panels = document.querySelectorAll(panel_name);
+        const continueButtons = document.querySelectorAll(continue_btn_name);
+
+        panels[0].classList.add('active-panel');
+
+        continueButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                // check if current task is fulfilled, now using the whole logic to check
+                if (index == 0 && answer_per_claim["selected_explanations"].length == 0 || index == 1 && answer_per_claim["rating"] == no_task2_ans) {
+                    alert('Please finish current task before proceeding!');
+                }
+                else {
+                    // proceed to next page
+                    panels[index].classList.remove('active-panel');
+                    panels[index + 1].classList.add('active-panel');
+                    panels[index].scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+                }
+            });
+        });
+
+    }
+    function displayReason(passage_panel, display_btn_name) {
+        /***
+         * full list of reason display button function
+         * click the button to expand/collapse the full list of reason
+         */
+        const panel = document.getElementById(passage_panel);
+        const display_button = document.getElementById(display_btn_name);
+        if (panel.classList.contains('active-panel')) {
+            panel.classList.remove('active-panel');
+            display_button.textContent = 'Expand';
+        } else {
+            panel.classList.add('active-panel');
+            display_button.textContent = 'Collapse';
+        }
+    }
+
+    function addNoAnsListener(clickable_sentence_name, no_ans_btn_name, citation_marker_num) {
+        /**
+         * select no explanation option
+         */
+        const sentences = document.getElementsByName(clickable_sentence_name);
+        const no_ans_btn = document.getElementById(no_ans_btn_name);
+        const citation_marker = '[' + citation_marker_num + ']';
+
+        no_ans_btn.addEventListener("click", () => {
+            // Deselect all sentences
+            sentences.forEach(s => {
+                s.classList.remove("selected");
+                s.textContent = s.textContent.replace(citation_marker, "");
+            });
+            answer_per_claim["selected_explanations"] = [no_task1_ans];
+            // console.log(answer_per_claim["selected_explanations"]);
+        });
+    }
+
+    function submitData() {
+        temp = {}
+        temp[cur_task_hash] = answer_per_claim;
+        answer_to_submit.push(temp);
+        const hidden_data = document.getElementById('data_to_submit');
+        hidden_data.value = JSON.stringify(answer_to_submit);
+    }
+
+    function recordAndProceed() {
+        /***
+         * 
+         * click next_claim button to record the PolitiHop_data of current claim and proceed to next claim quality assessment
+         * 
+         */
+        temp = {}
+        temp[cur_task_hash] = answer_per_claim;
+        answer_to_submit.push(temp);
+        cur_task += 1;
+        initAnswer();
+        useDataToRender(cur_task, num_task_to_do);
+        addTaskLogic(); // reload the task logic for the new claim
+
+        const panels = document.querySelectorAll('.task_pane');
+        panels[0].classList.add('active-panel');
+        // remove finish_pane active-panel
+        document.getElementById("finish_pane").classList.remove('active-panel');
+    }
+
+    function proceedToMainTask(check_id, current_display, next_display) {
+        /**
+         * Proceed to main task, check whether the user click the "understand" button
+         * @type {HTMLElement}
+         */
+        var check_click = document.getElementById(check_id);
+        if (check_click.checked == true) {
+            // flip display turn display:block state to display:none to hide the content
+            // it only turn display:none to display:block to show the hidden content
+            flip_display(current_display);
+            flip_display(next_display);
+        } else {
+            // the alert shows when the user does not clock the tickbox.
+            alert('You should read the plain language statement and consent form and tick the box before proceeding.');
+        }
+        // clear the answer
+        initAnswer();
+    }
+
+    function clickToReveal(btn_id, display_id) {
+        /**
+         * click to reveal the example answer and hide the button
+         * @type {HTMLElement}
+         */
+        var btn = document.getElementById(btn_id);
+        var display = document.getElementById(display_id);
+        btn.style.display = 'none';
+        display.style.display = 'block';
+    }
+
+    function flip_display(id) {
+        /**
+         * switch the display status to the reverse of an element
+         * @type {HTMLElement}
+         */
+        var x = document.getElementById(id);
+        if (x.style.display == 'none') {
+            x.style.display = 'inline-block';
+        } else {
+            x.style.display = 'none';
+        }
+        // This statement turns the page to top. By default, when the hidden context turns to show, it starts in the middle.
+        document.documentElement.scrollHeight;
+    }
+</script>
+
+</html>
