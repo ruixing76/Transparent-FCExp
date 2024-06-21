@@ -6,7 +6,7 @@
 ![Coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)
 
 
-This paper contains code and data for the paper [Evaluating Transparency of Machine Generated Fact Checking Explanations](https://arxiv.org/abs/2406.12645).
+This repo contains code and data for the paper [Evaluating Transparency of Machine Generated Fact Checking Explanations](https://arxiv.org/abs/2406.12645).
 
 ## Abstract
 An important factor when it comes to generating fact-checking explanations is the selection of evidence: intuitively, high-quality explanations can only be generated given the right evidence. In this work, we investigate the impact of human-curated vs. machine-selected evidence for explanation generation using large language models. To assess the quality of explanations, we focus on transparency (whether an explanation cites sources properly) and utility (whether an explanation is helpful in clarifying a claim). Surprisingly, we found that large language models generate similar or higher quality explanations using machine-selected evidence, suggesting carefully curated evidence (by humans) may not be necessary. That said, even with the best model, the generated explanations are not always faithful to the sources, suggesting further room for improvement in explanation generation for fact-checking.
@@ -32,14 +32,14 @@ The generated explanation data is mainly used in our work, which is stored here:
         "label": "claim veracity label from {true, false and half-true}",
         // No. 12 reason cited in explanation is masked
         "masked_reason": 12,
-        // No.1 sentence is the ground-truth
+        // answer index in "explanation"
         "ans_sens": [
             1 
         ],
         "core_reasons": [
             "12: No.12 core reason content"
         ],
-        // 1: explanation sentence is the answer sentence
+        // "1: explanation sentence [12]" is the ground-truth
         "explanation": [
             "0: explanation sentence",
             "1: explanation sentence [12]",
@@ -57,10 +57,10 @@ The generated explanation data is mainly used in our work, which is stored here:
 ```
 python preprocess_politihop.py
 ```
-It is recommended to use our preprocessed data under: `./data/TransExp_data/raw_dataset/raw_dataset.json`.
+We recommend to use our preprocessed data under: `./data/TransExp_data/raw_dataset/raw_dataset.json`.
 
 ## Explanation Generation
-Generate explanation using:
+Generate explanations using:
 ```
 python generate_explanation.py -model_name llama2-70b -output_dir output_dir
 ```
@@ -87,7 +87,7 @@ python create_HIT.py
 ```
 
 ## Cite
-If you find this work useful, please cite our paper.
+If you find this work useful, please kindly cite our paper.
 ```
 @misc{xing2024evaluating,
       title={Evaluating Transparency of Machine Generated Fact Checking Explanations}, 
