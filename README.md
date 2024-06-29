@@ -75,7 +75,7 @@ python postprocess_generation.py -model_name llama2-70b -output_dir output_dir
 - `-output_dir` is output directory for postprocessed explanation.
 
 ## Annotation
-Generate annotation using:
+Generate annotation data using:
 ```
 cd ./annotation
 python create_annotation_data.py
