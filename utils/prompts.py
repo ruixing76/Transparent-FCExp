@@ -1,5 +1,4 @@
 # prompts to generate explanation
-# todo unify gpt and llama prompts
 gpt_prompt_core = (
     "Instructions: You are required to write an accurate, coherent and logically consistent explanation for "
     "the claim based on the given veracity and list of reasons in one paragraph. Use an unbiased and "

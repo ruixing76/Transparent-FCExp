@@ -1,18 +1,12 @@
 # Transparent-FCExp
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-red.svg)](#python)
-![Coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)
-
-
-This repo contains code and data for the paper [Evaluating Transparency of Machine Generated Fact Checking Explanations](https://arxiv.org/abs/2406.12645).
+This repo contains code and data for the paper Evaluating Transparency of Machine Generated Fact Checking Explanations.
 
 ## Abstract
 An important factor when it comes to generating fact-checking explanations is the selection of evidence: intuitively, high-quality explanations can only be generated given the right evidence. In this work, we investigate the impact of human-curated vs. machine-selected evidence for explanation generation using large language models. To assess the quality of explanations, we focus on transparency (whether an explanation cites sources properly) and utility (whether an explanation is helpful in clarifying a claim). Surprisingly, we found that large language models generate similar or higher quality explanations using machine-selected evidence, suggesting carefully curated evidence (by humans) may not be necessary. That said, even with the best model, the generated explanations are not always faithful to the sources, suggesting further room for improvement in explanation generation for fact-checking.
 ## Installation
 ```
-git clone git@github.com:ruixing76/Transparent-FCExp.git && cd Transparent-FCExp && pip install -r requirement.txt
+pip install -r requirement.txt
 ```
 
 ## Data
@@ -84,17 +78,4 @@ python create_annotation_data.py
 Annotation is performed on [Amazon Mechanical Turk](https://www.mturk.com/). The webpage template can be found under `./annotation/annotation_platform.html`. Generate annotation webpage using:
 ```
 python create_HIT.py
-```
-
-## Cite
-If you find this work useful, please kindly cite our paper.
-```
-@misc{xing2024evaluating,
-      title={Evaluating Transparency of Machine Generated Fact Checking Explanations}, 
-      author={Rui Xing and Timothy Baldwin and Jey Han Lau},
-      year={2024},
-      eprint={2406.12645},
-      archivePrefix={arXiv},
-      primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area.'}
-}
 ```
