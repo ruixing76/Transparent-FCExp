@@ -89,12 +89,13 @@ python create_HIT.py
 ## Cite
 If you find this work useful, please kindly cite our paper.
 ```
-@misc{xing2024evaluating,
-      title={Evaluating Transparency of Machine Generated Fact Checking Explanations}, 
+@misc{xing2024evaluatingevidenceattributiongenerated,
+      title={Evaluating Evidence Attribution in Generated Fact Checking Explanations}, 
       author={Rui Xing and Timothy Baldwin and Jey Han Lau},
       year={2024},
       eprint={2406.12645},
       archivePrefix={arXiv},
-      primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area.'}
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.12645}, 
 }
 ```
