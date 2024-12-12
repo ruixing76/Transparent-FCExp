@@ -6,10 +6,10 @@
 ![Coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)
 
 
-This repo contains code and data for the paper [Evaluating Transparency of Machine Generated Fact Checking Explanations](https://arxiv.org/abs/2406.12645).
+This repo contains code and data for the paper [Evaluating Evidence Attribution in Generated Fact Checking Explanations](https://arxiv.org/abs/2406.12645).
 
 ## Abstract
-An important factor when it comes to generating fact-checking explanations is the selection of evidence: intuitively, high-quality explanations can only be generated given the right evidence. In this work, we investigate the impact of human-curated vs. machine-selected evidence for explanation generation using large language models. To assess the quality of explanations, we focus on transparency (whether an explanation cites sources properly) and utility (whether an explanation is helpful in clarifying a claim). Surprisingly, we found that large language models generate similar or higher quality explanations using machine-selected evidence, suggesting carefully curated evidence (by humans) may not be necessary. That said, even with the best model, the generated explanations are not always faithful to the sources, suggesting further room for improvement in explanation generation for fact-checking.
+Automated fact-checking systems often struggle with trustworthiness, as their generated explanations can include hallucinations. In this work, we explore evidence attribution for fact-checking explanation generation. We introduce a novel evaluation protocol, citation masking and recovery, to assess attribution quality in generated explanations. We implement our protocol using both human annotators and automatic annotators, and find that LLM annotation correlates with human annotation, suggesting that attribution assessment can be automated. Finally, our experiments reveal that: (1) the best-performing LLMs still generate explanations with inaccurate attributions; and (2) human-curated evidence is essential for generating better explanations.
 ## Installation
 ```
 git clone git@github.com:ruixing76/Transparent-FCExp.git && cd Transparent-FCExp && pip install -r requirement.txt
