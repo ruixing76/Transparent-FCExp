@@ -1,7 +1,7 @@
 # Transparent-FCExp
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.1-blue)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-red.svg)](#python)
 ![Coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)
 
